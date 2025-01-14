@@ -1,0 +1,141 @@
+[project]
+name = "Factor-Research"
+version = "0.0.0"
+description = "Factor-Research Projects."
+authors = [{ name = "Sam Sheeran", email = "sSheeran@flexibleplan.com" }]
+requires-python = ">=3.11"
+dependencies = [
+    "ipykernel>=6.29.5",
+]
+
+[dependency-groups]
+dev = []
+
+[tool.uv]
+python-downloads = "never"
+python-preference = "only-system"
+cache-dir = ".uv-cache"
+
+# https://microsoft.github.io/pyright/#/configuration
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+[tool.pyright]
+include = ["src"]
+exclude = ["**/__pycache__", "src/experimental", "src/typestubs"]
+# pythonPlatform = "Linux"
+# https://microsoft.github.io/pyright/#/configuration?id=sample-pyprojecttoml-file
+typeCheckingMode = "basic"
+reportMissingImports = "error"
+reportGeneralTypeIssues = "none"
+reportMissingTypeStubs = false
+defineConstant = { DEBUG = true }
+
+# See all rules $ ruff linter
+# https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+line-length = 150
+output-format = "github"
+src = ["src"]
+show-fixes = true
+force-exclude = true
+extend-exclude = ["__init__.py"]
+include = ["*.py", "*.pyi"]
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+task-tags = ["TODO"]
+select = ["ALL"]
+extend-select = ["B", "Q", "I"]
+ignore = [
+    "D203",
+    "D212",
+    # "UP004",
+    # "E203",
+    "E501",
+    # "PLR0916",
+    # "PLR2004",
+    "COM812",
+    "ISC001",
+    # "PLR1702",
+]
+fixable = ["ALL"]
+unfixable = ["B"] # "SIM", "TRY", "F841", "ERA001"
+
+[tool.ruff.format]
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 150
+
+[tool.ruff.lint.pylint]
+max-args = 15
+max-locals = 20
+max-branches = 20
+max-statements = 80
+
+[tool.ruff.lint.mccabe]
+max-complexity = 100
+
+[tool.ruff.lint.per-file-ignores]
+# "__init__.py" = ["F401", "F403", "F405"]
+"tests/*" = ["E501", "S101", "ANN", "D402", "T201"]
+# "logger.py" = ["N815"]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"__init__.py" = ["D104"]
+"*.ipynb" = ["D100", "F401"]
+
+[tool.ruff.lint.pycodestyle]
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.pydocstyle]
+# convention = "sphinx" #(Enable when it's available. Currently supporting "google" | "numpy" | "pep257")
+
+[tool.ruff.lint.pyupgrade]
+keep-runtime-typing = true
+
+[tool.ruff.lint.flake8-type-checking]
+strict = true
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.lint.flake8-copyright]
+author = "Gayan Nagoda"
+
+[tool.bandit]
+exclude_dirs = ["tests"]
+
+# https://mypy.readthedocs.io/en/stable/config_file.html
+# https://mypy-play.net/
+[tool.mypy]
+strict = true
+pretty = true
+mypy_path = "src"
+exclude = ["tests"]
+cache_dir = "/dev/null"
+files = ["*.py", "*.ipynb"]
+show_error_codes = true
+# Implicit
+implicit_reexport = true
+implicit_optional = true
+# Warn
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_ignores = true
+# Ignore
+ignore_missing_imports = true
+# Disallow
+disallow_untyped_decorators = false
+# Allow
+allow_redefinition = true
+# Plugins
+plugins = "numpy.typing.mypy_plugin"
+
+[[tool.mypy.overrides]]
+module = ["numba.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+ignore_errors = true
