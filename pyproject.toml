@@ -6,10 +6,13 @@ authors = [{ name = "Sam Sheeran", email = "sSheeran@flexibleplan.com" }]
 requires-python = ">=3.11"
 dependencies = [
     "ipykernel>=6.29.5",
+    "numpy>=2.2.1",
 ]
 
 [dependency-groups]
-dev = []
+dev = [
+    "pytest>=8.3.4",
+]
 
 [tool.uv]
 python-downloads = "never"

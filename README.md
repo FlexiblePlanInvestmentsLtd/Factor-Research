@@ -21,7 +21,6 @@ Go to the project directory and run the following command:
 
 ```bash
 uv venv --python 3.11 --no-python-downloads --python-preference only-system
-uv sync
 ```
 
 Add/remove packages to the environment (Ude --dev for development ONLY packages):
