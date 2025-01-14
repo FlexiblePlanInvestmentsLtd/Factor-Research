@@ -15,6 +15,35 @@ Installation:
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+Create/Synchronize the environment:
+
+Go to the project directory and run the following command:
+
+```bash
+uv venv --python 3.11 --no-python-downloads --python-preference only-system
+uv sync
+```
+
+Add/remove packages to the environment (Ude --dev for development ONLY packages):
+
+```bash
+uv add <package>
+uv remove <package>
+```
+
+Sync/Update packages in the environment:
+
+```bash
+uv sync --all-groups
+uv lock --upgrade
+```
+
+Check package upgrades:
+
+```bash
+uv tree --outdated --all-groups
+```
+
 ### VSode
 
 * Python Data Science Extension Pack: [Link](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.python-ds-extension-pack)  
