@@ -19,7 +19,9 @@ class BuildFeatures:
                     "Average_True_Range", "Average_Price", "Bollinger_Bands", \
                     "Beta", "Balance_of_Power", "Commodity_Channel_Index", "Doji_Star", "Dragonfly_Doji", "Engulfing_Pattern", "Evening_Doji_Star",\
                     "Evening_Star", "Up_Down_gap_side_by_side_white_lines", "Gravestone_Doji", "Hammer", "Hanging_Man", "Harami_Pattern", "Harami_Cross_Pattern",\
-                    "High_Wave_Candle", "Hikkake_Pattern", "Modified_Hikkake_Pattern", "Homing_Pigeon"]
+                    "High_Wave_Candle", "Hikkake_Pattern", "Modified_Hikkake_Pattern", "Homing_Pigeon", "Identical_Three_Crows", "In_Neck_Pattern",\
+                    "Inverted_Hammer","Kicking","Kicking_by_Length", "Ladder_Bottom", "Long_Legged_Doji", "Long_Line_Candle", "Marubozu", "Matching_Low",\
+                    "Mat_Hold", "Morning_Doji_Star", "Morning_Star", "On_Neck_Pattern", "Piercing_Pattern"]
         
         ##Aroon and Aroon Oscillator have issues 
 
@@ -133,3 +135,48 @@ class BuildFeatures:
 
     def Homing_Pigeon(self):
         self.technical_features["Homing_Pigeon"] = talib.CDLHOMINGPIGEON(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Identical_Three_Crows(self):
+        self.technical_features["Identical_Three_Crows"] = talib.CDLIDENTICAL3CROWS(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def In_Neck_Pattern(self):
+        self.technical_features["In_Neck_Pattern"] = talib.CDLINNECK(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Inverted_Hammer(self):
+        self.technical_features["Inverted_Hammer"] = talib.CDLINVERTEDHAMMER(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Kicking(self):
+        self.technical_features["Kicking"] = talib.CDLKICKING(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Kicking_by_Length(self):
+        self.technical_features["Kicking_by_Length"] = talib.CDLKICKINGBYLENGTH(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Ladder_Bottom(self):
+        self.technical_features["Ladder_Bottom"] = talib.CDLLADDERBOTTOM(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Long_Legged_Doji(self):
+        self.technical_features["Long_Legged_Doji"] = talib.CDLLONGLEGGEDDOJI(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Long_Line_Candle(self):
+        self.technical_features["Long_Line_Candle"] = talib.CDLLONGLINE(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Marubozu(self):
+        self.technical_features["Marubozu"] = talib.CDLMARUBOZU(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Matching_Low(self):
+        self.technical_features["Matching_Low"] = talib.CDLMATCHINGLOW(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Mat_Hold(self):
+        self.technical_features["Mat_Hold"] = talib.CDLMATHOLD(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Morning_Doji_Star(self):
+        self.technical_features["Morning_Star"] = talib.CDLMORNINGDOJISTAR(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Morning_Star(self):
+        self.technical_features["Morning_Star"] = talib.CDLMORNINGSTAR(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def On_Neck_Pattern(self):
+        self.technical_features["On_Neck_Pattern"] = talib.CDLONNECK(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Piercing_Pattern(self):
+        self.technical_features["Piercing_Pattern"] = talib.CDLPIERCING(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
