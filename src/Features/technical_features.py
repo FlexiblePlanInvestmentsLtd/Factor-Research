@@ -24,7 +24,9 @@ class BuildFeatures:
                     "Mat_Hold", "Morning_Doji_Star", "Morning_Star", "On_Neck_Pattern", "Piercing_Pattern",\
                     "Rising_Falling_Three_Methods", "Separating_Lines", "Shooting_Star", "Short_Line_Candle", "Spinning_Top", "Stalled_Pattern", "Stick_Sandwich",\
                     "Takuri", "Tasuki_Gap", "Thrusting_Pattern", "Tristar_Pattern", "Unique_3_River", "Upside_Gap_Two_Crows", "Upside_Downside_Gap_Three_Methods",
-                    "Chande_Momentum_Oscillator"]
+                    "Chande_Momentum_Oscillator","Two_Crows", "Three_Black_Crows", "Three_Inside_Up_Down", "Three_Outside_Up_Down", "Three_Stars_In_The_South",\
+                    "Three_Advancing_White_Soldiers", "Abandoned_Baby", "Advance_Block", "Belt_Hold", "Breakaway", "Closing_Marubozu", "Concealing_Baby_Swallow",\
+                     "Counterattack", "Dark_Cloud_Cover", "Doji"]
         
         ##Aroon and Aroon Oscillator have issues 
 
@@ -228,3 +230,80 @@ class BuildFeatures:
 
     def Chande_Momentum_Oscillator(self):
         self.technical_features["Chande_Momentum_Oscillator"] = talib.CMO(self.stock["Close"])
+    
+    def Two_Crows(self):
+        self.technical_features["Two_Crows"] = talib.CDL2CROWS(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Three_Black_Crows(self):
+        self.technical_features["Three_Black_Crows"] = talib.CDL3BLACKCROWS(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Three_Inside_Up_Down(self):
+        self.technical_features["Three_Inside_Up"] = talib.CDL3INSIDE(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Three_Outside_Up_Down(self):
+        self.technical_features["Three_Outside_Up"] = talib.CDL3OUTSIDE(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Three_Stars_In_The_South(self):
+        self.technical_features["Three_Stars_In_The_South"] = talib.CDL3STARSINSOUTH(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Three_Advancing_White_Soldiers(self):
+        self.technical_features["Three_Advancing_White_Soldiers"] = talib.CDL3WHITESOLDIERS(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Abandoned_Baby(self):
+        self.technical_features["Abandoned_Baby"] = talib.CDLABANDONEDBABY(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Advance_Block(self):
+        self.technical_features["Advance_Block"] = talib.CDLADVANCEBLOCK(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Belt_Hold(self):
+        self.technical_features["Belt_Hold"] = talib.CDLBELTHOLD(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Breakaway(self):
+        self.technical_features["Breakaway"] = talib.CDLBREAKAWAY(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Closing_Marubozu(self):
+        self.technical_features["Closing_Marubozu"] = talib.CDLCLOSINGMARUBOZU(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Concealing_Baby_Swallow(self):
+        self.technical_features["Concealing_Baby_Swallow"] = talib.CDLCONCEALBABYSWALL(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Counterattack(self):
+        self.technical_features["Counterattack"] = talib.CDLCOUNTERATTACK(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+
+    def Dark_Cloud_Cover(self):
+        self.technical_features["Dark_Cloud_Cover"] = talib.CDLDARKCLOUDCOVER(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"], penetration=0
+        )
+
+    def Doji(self):
+        self.technical_features["Doji"] = talib.CDLDOJI(
+            self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
+        )
+    
+
