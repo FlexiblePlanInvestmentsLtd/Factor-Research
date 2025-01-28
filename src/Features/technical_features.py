@@ -21,7 +21,10 @@ class BuildFeatures:
                     "Evening_Star", "Up_Down_gap_side_by_side_white_lines", "Gravestone_Doji", "Hammer", "Hanging_Man", "Harami_Pattern", "Harami_Cross_Pattern",\
                     "High_Wave_Candle", "Hikkake_Pattern", "Modified_Hikkake_Pattern", "Homing_Pigeon", "Identical_Three_Crows", "In_Neck_Pattern",\
                     "Inverted_Hammer","Kicking","Kicking_by_Length", "Ladder_Bottom", "Long_Legged_Doji", "Long_Line_Candle", "Marubozu", "Matching_Low",\
-                    "Mat_Hold", "Morning_Doji_Star", "Morning_Star", "On_Neck_Pattern", "Piercing_Pattern"]
+                    "Mat_Hold", "Morning_Doji_Star", "Morning_Star", "On_Neck_Pattern", "Piercing_Pattern",\
+                    "Rising_Falling_Three_Methods", "Separating_Lines", "Shooting_Star", "Short_Line_Candle", "Spinning_Top", "Stalled_Pattern", "Stick_Sandwich",\
+                    "Takuri", "Tasuki_Gap", "Thrusting_Pattern", "Tristar_Pattern", "Unique_3_River", "Upside_Gap_Two_Crows", "Upside_Downside_Gap_Three_Methods",
+                    "Chande_Momentum_Oscillator"]
         
         ##Aroon and Aroon Oscillator have issues 
 
@@ -180,3 +183,48 @@ class BuildFeatures:
 
     def Piercing_Pattern(self):
         self.technical_features["Piercing_Pattern"] = talib.CDLPIERCING(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Rising_Falling_Three_Methods(self):
+        self.technical_features["Rising_Falling_Three_Methods"] = talib.CDLRISEFALL3METHODS(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Separating_Lines(self):
+        self.technical_features["Separating_Lines"] = talib.CDLSEPARATINGLINES(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Shooting_Star(self):
+        self.technical_features["Shooting_Star"] = talib.CDLSHOOTINGSTAR(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Short_Line_Candle(self):
+        self.technical_features["Short_Line_Candle"] = talib.CDLSHORTLINE(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Spinning_Top(self):
+        self.technical_features["Spinning_Top"] = talib.CDLSPINNINGTOP(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Stalled_Pattern(self):
+        self.technical_features["Stalled_Pattern"] = talib.CDLSTALLEDPATTERN(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Stick_Sandwich(self):
+        self.technical_features["Stick_Sandwich"] = talib.CDLSTICKSANDWICH(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Takuri(self):
+        self.technical_features["Takuri"] = talib.CDLTAKURI(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Tasuki_Gap(self):
+        self.technical_features["Tasuki_Gap"] = talib.CDLTASUKIGAP(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Thrusting_Pattern(self):
+        self.technical_features["Thrusting_Pattern"] = talib.CDLTHRUSTING(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Tristar_Pattern(self):
+        self.technical_features["Tristar_Pattern"] = talib.CDLTRISTAR(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Unique_3_River(self):
+        self.technical_features["Unique_3_River"] = talib.CDLUNIQUE3RIVER(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Upside_Gap_Two_Crows(self):
+        self.technical_features["Upside_Gap_Two_Crows"] = talib.CDLUPSIDEGAP2CROWS(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Upside_Downside_Gap_Three_Methods(self):
+        self.technical_features["Upside_Downside_Gap_Three_Methods"] = talib.CDLXSIDEGAP3METHODS(self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Chande_Momentum_Oscillator(self):
+        self.technical_features["Chande_Momentum_Oscillator"] = talib.CMO(self.stock["Close"])
