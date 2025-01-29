@@ -23,8 +23,11 @@ class BuildFeatures:
                     "Inverted_Hammer","Kicking","Kicking_by_Length", "Ladder_Bottom", "Long_Legged_Doji", "Long_Line_Candle", "Marubozu", "Matching_Low",\
                     "Mat_Hold", "Morning_Doji_Star", "Morning_Star", "On_Neck_Pattern", "Piercing_Pattern",\
                     "Rising_Falling_Three_Methods", "Separating_Lines", "Shooting_Star", "Short_Line_Candle", "Spinning_Top", "Stalled_Pattern", "Stick_Sandwich",\
-                    "Takuri", "Tasuki_Gap", "Thrusting_Pattern", "Tristar_Pattern", "Unique_3_River", "Upside_Gap_Two_Crows", "Upside_Downside_Gap_Three_Methods",
-                    "Chande_Momentum_Oscillator"]
+                    "Takuri", "Tasuki_Gap", "Thrusting_Pattern", "Tristar_Pattern", "Unique_3_River", "Upside_Gap_Two_Crows", "Upside_Downside_Gap_Three_Methods",\
+                    "Chande_Momentum_Oscillator", "Pearson_Correlation_Coefficient", "Double_Exponential_Moving_Average", "Directional_Movement_Index",\
+                    "Exponential_Moving_Average", "Hilbert_Transform_Dominant_Cycle_Period", "Hilbert_Transform_Dominant_Cycle_Phase", "Hilbert_Transform_Phasor_Components",\
+                    "Hilbert_Transform_SineWave", "Hilbert_Transform_Instantaneous_Trendline", "Hilbert_Transform_Trend_vs_Cycle_Mode", "Kaufman_Adaptive_Moving_Average",\
+                    "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept"]
         
         ##Aroon and Aroon Oscillator have issues 
 
@@ -228,3 +231,50 @@ class BuildFeatures:
 
     def Chande_Momentum_Oscillator(self):
         self.technical_features["Chande_Momentum_Oscillator"] = talib.CMO(self.stock["Close"])
+        
+    def Pearson_Correlation_Coefficient(self):
+        self.technical_features["Pearson_Correlation_Coefficient"] = talib.CORREL(self.stock["Close"],self.stock["Volume"])
+        
+    def Double_Exponential_Moving_Average(self):
+        self.technical_features["Double_Exponential_Moving_Average"] = talib.DEMA(self.stock["Close"])
+        
+    def Directional_Movement_Index(self):
+        self.technical_features["Directional_Movement_Index"] = talib.DX(self.stock["High"], self.stock["Low"], self.stock["Close"])
+        
+    def Exponential_Moving_Average(self):
+        self.technical_features["Exponential_Moving_Average"] = talib.EMA(self.stock["Close"])
+        
+    def Hilbert_Transform_Dominant_Cycle_Period(self):
+        self.technical_features["Hilbert_Transform_Dominant_Cycle_Period"] = talib.HT_DCPERIOD(self.stock["Close"])
+        
+    def Hilbert_Transform_Dominant_Cycle_Phase(self):
+        self.technical_features["Hilbert_Transform_Dominant_Cycle_Phase"] = talib.HT_DCPHASE(self.stock["Close"])
+        
+    def Hilbert_Transform_Phasor_Components(self):
+        inphase, quadrature = talib.HT_PHASOR(self.stock["Close"])
+        self.technical_features["Hilbert_Transform_Phasor_Components_inphase"] = inphase
+        self.technical_features["Hilbert_Transform_Phasor_Components_quadrature"] = quadrature
+    
+    def Hilbert_Transform_SineWave(self):
+        sine, leadsine = talib.HT_SINE(self.stock["Close"]) 
+        self.technical_features["Hilbert_Transform_SineWave_sine"] = sine
+        self.technical_features["Hilbert_Transform_SineWave_leadsine"] = leadsine
+        
+    def Hilbert_Transform_Instantaneous_Trendline(self):
+        self.technical_features["Hilbert_Transform_Instantaneous_Trendline"] = talib.HT_TRENDLINE(self.stock["Close"]) 
+        
+    def Hilbert_Transform_Trend_vs_Cycle_Mode(self):
+        self.technical_features["Hilbert_Transform_Trend_vs_Cycle_Mode"] = talib.HT_TRENDMODE(self.stock["Close"])    
+        
+    def Kaufman_Adaptive_Moving_Average(self):
+        self.technical_features["Kaufman_Adaptive_Moving_Average"] = talib.KAMA(self.stock["Close"])   
+        
+    def Linear_Regression(self):
+        self.technical_features["Linear_Regression"] = talib.LINEARREG(self.stock["Close"]) 
+        
+    def Linear_Regression_Angle(self):
+        self.technical_features["Linear_Regression_Angle"] = talib.LINEARREG_ANGLE(self.stock["Close"])   
+
+    def Linear_Regression_Intercept(self):
+        self.technical_features["Linear_Regression_Intercept"] = talib.LINEARREG_INTERCEPT(self.stock["Close"])   
+        
