@@ -27,7 +27,9 @@ class BuildFeatures:
                     "Chande_Momentum_Oscillator", "Pearson_Correlation_Coefficient", "Double_Exponential_Moving_Average", "Directional_Movement_Index",\
                     "Exponential_Moving_Average", "Hilbert_Transform_Dominant_Cycle_Period", "Hilbert_Transform_Dominant_Cycle_Phase", "Hilbert_Transform_Phasor_Components",\
                     "Hilbert_Transform_SineWave", "Hilbert_Transform_Instantaneous_Trendline", "Hilbert_Transform_Trend_vs_Cycle_Mode", "Kaufman_Adaptive_Moving_Average",\
-                    "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept"]
+                    "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept",\
+                    "Rate_of_Change_Percentage", "Rate_of_Change_Ratio", "Rate_of_Change_Ratio_100","Relative_Strength_Index", "Parabolic_SAR", "Parabolic_SAR_Extended",\
+                    "Simple_Moving_Average", "Standard_Deviation"]
         
         ##Aroon and Aroon Oscillator have issues 
 
@@ -352,3 +354,45 @@ class BuildFeatures:
         self.technical_features["Doji"] = talib.CDLDOJI(
             self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
         )
+    
+    def Rate_of_Change_Percentage(self):
+        """Rate of Change Percentage: (price - prevPrice) / prevPrice"""
+        self.technical_features["Rate_of_Change_Percentage"] = talib.ROCP(self.stock["Close"], timeperiod=10)  # You can adjust timeperiod as needed
+
+    def Rate_of_Change_Ratio(self):
+        """Rate of Change Ratio: (price / prevPrice)"""
+        self.technical_features["Rate_of_Change_Ratio"] = talib.ROCR(self.stock["Close"], timeperiod=10)  # Adjust timeperiod as needed
+
+    def Rate_of_Change_Ratio_100(self):
+        """Rate of Change Ratio 100 Scale: (price / prevPrice) * 100"""
+        self.technical_features["Rate_of_Change_Ratio_100"] = talib.ROCR100(self.stock["Close"], timeperiod=10)  # Adjust timeperiod as needed
+
+    def Relative_Strength_Index(self):
+        """Relative Strength Index"""
+        self.technical_features["Relative_Strength_Index"] = talib.RSI(self.stock["Close"], timeperiod=14)  # Commonly 14
+
+    def Parabolic_SAR(self):
+        """Parabolic SAR"""
+        self.technical_features["Parabolic_SAR"] = talib.SAR(
+            self.stock["High"], self.stock["Low"], acceleration=0.02, maximum=0.2
+        )  # Default parameters; adjust if needed
+
+    def Parabolic_SAR_Extended(self):
+        """Parabolic SAR - Extended"""
+        sar_ext = talib.SAREXT(
+            self.stock["High"], self.stock["Low"], 
+            startvalue=0, offsetonreverse=0, 
+            accelerationinitlong=0.02, 
+            accelerationlong=0.02, accelerationmaxlong=0.2,
+            accelerationinitshort=0.02, 
+            accelerationshort=0.02, accelerationmaxshort=0.2
+        )
+        self.technical_features["Parabolic_SAR_Extended"] = sar_ext
+
+    def Simple_Moving_Average(self):
+        """Simple Moving Average"""
+        self.technical_features["Simple_Moving_Average"] = talib.SMA(self.stock["Close"], timeperiod=30)  # Example with 30-day SMA
+
+    def Standard_Deviation(self):
+        """Standard Deviation"""
+        self.technical_features["Standard_Deviation"] = talib.STDDEV(self.stock["Close"], timeperiod=30, nbdev=1)  # 30-day STDDEV
