@@ -34,7 +34,9 @@ class BuildFeatures:
                     "Index_of_highest_value_over_a_specified_period", "triangular_moving_average", "one_day_rate_of_change_of_a_triple_smooth_ema", "time_series_forecast",\
                     "typical_price", "ultimate_oscillator", "variance", "weighted_close_price", "williams_r", "weighted_moving_average",\
                     "Minus_Directional_Indicator", "Minus_Directional_Movement", "Momentum", "Normalized_Average_True_Range", "On_Balance_Volume",\
-                    "Plus_Directional_Indicator", "Plus_Directional_Movement", "Percentage_Price_Oscillator"]
+                    "Plus_Directional_Indicator", "Plus_Directional_Movement", "Percentage_Price_Oscillator" , "Median_Price", "Money_Flow_Index", "MidPoint_over_period",\
+                    "Midpoint_Price_over_period", "Lowest_value_over_period", "Index_of_lowest_value_over_period", "Lowest_and_highest_values_over_period", \
+                    "Indexes_of_lowest_and_highest_values_over_period"]
         
         ##Aroon and Aroon Oscillator, Moving_Average_Convergence_Divergence_Fix_12_26, have issues 
 
@@ -525,6 +527,34 @@ class BuildFeatures:
         
     def Percentage_Price_Oscillator(self):
         self.technical_features["Percentage_Price_Oscillator"] = talib.PPO(self.stock["High"])
+
+
+    def Median_Price(self):
+        self.technical_features["Median_Price"] = talib.MEDPRICE(self.stock["High"], self.stock["Low"])
+
+    def Money_Flow_Index(self, timeperiod=14):
+        self.technical_features["Money_Flow_Index"] = talib.MFI(self.stock["High"], self.stock["Low"], self.stock["Close"], self.stock["Volume"], timeperiod=timeperiod)
+
+    def MidPoint_over_period(self, timeperiod=14):
+        self.technical_features["MidPoint_over_period"] = talib.MIDPOINT(self.stock["Close"], timeperiod=timeperiod)
+
+    def Midpoint_Price_over_period(self, timeperiod=14):
+        self.technical_features["Midpoint_Price_over_period"] = talib.MIDPRICE(self.stock["High"], self.stock["Low"], timeperiod=timeperiod)
+
+    def Lowest_value_over_period(self, timeperiod=14):
+        self.technical_features["Lowest_value_over_period"] = talib.MIN(self.stock["Close"], timeperiod=timeperiod)
+
+    def Index_of_lowest_value_over_period(self, timeperiod=14):
+        self.technical_features["Index_of_lowest_value_over_period"] = talib.MININDEX(self.stock["Close"], timeperiod=timeperiod)
+
+    def Lowest_and_highest_values_over_period(self, timeperiod=14):
+        self.technical_features["Lowest_value_over_period"] = talib.MIN(self.stock["Close"], timeperiod=timeperiod)
+        self.technical_features["Highest_value_over_period"] = talib.MAX(self.stock["Close"], timeperiod=timeperiod)
+
+    def Indexes_of_lowest_and_highest_values_over_period(self, timeperiod=14):
+        self.technical_features["Index_of_lowest_value_over_period"] = talib.MININDEX(self.stock["Close"], timeperiod=timeperiod)
+        self.technical_features["Index_of_highest_value_over_period"] = talib.MAXINDEX(self.stock["Close"], timeperiod=timeperiod)
+
         
     
     
