@@ -27,14 +27,16 @@ class BuildFeatures:
                     "Chande_Momentum_Oscillator", "Pearson_Correlation_Coefficient", "Double_Exponential_Moving_Average", "Directional_Movement_Index",\
                     "Exponential_Moving_Average", "Hilbert_Transform_Dominant_Cycle_Period", "Hilbert_Transform_Dominant_Cycle_Phase", "Hilbert_Transform_Phasor_Components",\
                     "Hilbert_Transform_SineWave", "Hilbert_Transform_Instantaneous_Trendline", "Hilbert_Transform_Trend_vs_Cycle_Mode", "Kaufman_Adaptive_Moving_Average",\
-                    "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept"]
+                    "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept", "Linear_Regression_Slope", "All_Moving_Average", "Moving_Average_Convergence_Divergence",\
+                    "MACD_with_controllable_MA_type","Moving_Average_Convergence/Divergence_Fix_12/26","MESA_Adaptive_Moving_Average","Highest_value_over_a_specified_period",\
+                    "Index_of_highest_value_over_a_specified_period"]
         
         ##Aroon and Aroon Oscillator have issues 
 
         self.technical_features=pd.DataFrame(index=self.stock.index)
 
         #### Add Technical Features Here ####
-        for feature in features:
+        for feature in features[-8:]:
             try:
                 method_name = getattr(self, feature)  # Get the method from class
                 method_name()
@@ -352,3 +354,29 @@ class BuildFeatures:
         self.technical_features["Doji"] = talib.CDLDOJI(
             self.stock["Open"], self.stock["High"], self.stock["Low"], self.stock["Close"]
         )
+
+    def Linear_Regression_Slope(self):
+        self.technical_features["Linear_Regression_Slope"] = talib.LINEARREG_SLOPE(self.stock["Close"])
+
+    def All_Moving_Average(self):
+        self.technical_features["All_Moving_Average"] = talib.MA(self.stock["Close"])
+
+    def Moving_Average_Convergence_Divergence(self):
+        self.technical_features["Moving_Average_Convergence_Divergence"] = talib.MACD(self.stock["Close"])
+
+    def MACD_with_controllable_MA_type(self):
+        self.technical_features["MACD_with_controllable_MA_type"] = talib.MACDEXT(self.stock["Close"])
+
+    def Moving_Average_Convergence_Divergence_Fix_12_26(self):
+        self.technical_features["Moving_Average_Convergence/Divergence_Fix_12/26"] = talib.MACDFIX(self.stock["Close"])
+
+    def MESA_Adaptive_Moving_Average(self):
+        self.technical_features["MESA_Adaptive_Moving_Average"] = talib.MAMA(self.stock["Close"])
+
+    def Highest_value_over_a_specified_period(self):
+        self.technical_features["Highest_value_over_a_specified_period"] = talib.MAX(self.stock["Close"], timeperiod=30)
+
+    def Index_of_highest_value_over_a_specified_period(self):
+        self.technical_features["Index_of_highest_value_over_a_specified_period"] = talib.MAXINDEX(self.stock["Close"], timeperiod=30)
+
+    
