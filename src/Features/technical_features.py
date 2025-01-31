@@ -29,14 +29,16 @@ class BuildFeatures:
                     "Hilbert_Transform_SineWave", "Hilbert_Transform_Instantaneous_Trendline", "Hilbert_Transform_Trend_vs_Cycle_Mode", "Kaufman_Adaptive_Moving_Average",\
                     "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept",\
                     "Rate_of_Change_Percentage", "Rate_of_Change_Ratio", "Rate_of_Change_Ratio_100","Relative_Strength_Index", "Parabolic_SAR", "Parabolic_SAR_Extended",\
-                    "Simple_Moving_Average", "Standard_Deviation"]
+                    "Simple_Moving_Average", "Standard_Deviation", "Linear_Regression_Slope", "All_Moving_Average", "Moving_Average_Convergence_Divergence",\
+                    "MACD_with_controllable_MA_type","Moving_Average_Convergence/Divergence_Fix_12/26","MESA_Adaptive_Moving_Average","Highest_value_over_a_specified_period",\
+                    "Index_of_highest_value_over_a_specified_period"]
         
-        ##Aroon and Aroon Oscillator have issues 
+        ##Aroon and Aroon Oscillator, Moving_Average_Convergence_Divergence_Fix_12_26, have issues 
 
         self.technical_features=pd.DataFrame(index=self.stock.index)
 
         #### Add Technical Features Here ####
-        for feature in features[-8:]:
+        for feature in features:
             try:
                 method_name = getattr(self, feature)  # Get the method from class
                 method_name()
@@ -425,16 +427,45 @@ class BuildFeatures:
         self.technical_features["All_Moving_Average"] = talib.MA(self.stock["Close"])
 
     def Moving_Average_Convergence_Divergence(self):
-        self.technical_features["Moving_Average_Convergence_Divergence"] = talib.MACD(self.stock["Close"])
+        macd, signal, hist = talib.MACD(self.stock["Close"])
+        self.technical_features["MACD"] = macd
+        self.technical_features["MACD_Signal"] = signal
+        self.technical_features["MACD_Histogram"] = hist
 
     def MACD_with_controllable_MA_type(self):
-        self.technical_features["MACD_with_controllable_MA_type"] = talib.MACDEXT(self.stock["Close"])
+        macd, signal, hist = talib.MACDEXT(
+            self.stock["Close"],
+            fastperiod=12,
+            slowperiod=26,
+            signalperiod=9,
+            fastmatype=talib.MA_Type.EMA,
+            slowmatype=talib.MA_Type.EMA,
+            signalmatype=talib.MA_Type.EMA
+        )
+        self.technical_features["MACD_EXT"] = macd
+        self.technical_features["MACD_EXT_Signal"] = signal
+        self.technical_features["MACD_EXT_Histogram"] = hist
 
     def Moving_Average_Convergence_Divergence_Fix_12_26(self):
-        self.technical_features["Moving_Average_Convergence/Divergence_Fix_12/26"] = talib.MACDFIX(self.stock["Close"])
+        
+        macd, signal, hist = talib.MACDFIX(
+            self.stock["Close"],
+            signalperiod=9
+        )
+        self.technical_features["MACDFIX"] = macd
+        self.technical_features["MACDFIX_Signal"] = signal
+        self.technical_features["MACDFIX_Histogram"] = hist
+        
+
 
     def MESA_Adaptive_Moving_Average(self):
-        self.technical_features["MESA_Adaptive_Moving_Average"] = talib.MAMA(self.stock["Close"])
+        mama, fama = talib.MAMA(
+            self.stock["Close"],
+            fastlimit=0.5,
+            slowlimit=0.05
+        )
+        self.technical_features["MAMA"] = mama
+        self.technical_features["FAMA"] = fama
 
     def Highest_value_over_a_specified_period(self):
         self.technical_features["Highest_value_over_a_specified_period"] = talib.MAX(self.stock["Close"], timeperiod=30)
