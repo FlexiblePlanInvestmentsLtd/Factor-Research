@@ -396,3 +396,24 @@ class BuildFeatures:
     def Standard_Deviation(self):
         """Standard Deviation"""
         self.technical_features["Standard_Deviation"] = talib.STDDEV(self.stock["Close"], timeperiod=30, nbdev=1)  # 30-day STDDEV
+
+    def Stochastic(self):
+        self.technical_features["Stochastic"] = talib.STOCH(self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Stochastic_Fast(self):
+        self.technical_features["Stochastic_Fast"] = talib.STOCHF(self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def Stochastic_RSI(self):
+        self.technical_features["Stochastic_RSI"] = talib.STOCHRSI(self.stock["Close"])
+
+    def Summation(self):
+        self.technical_features["Summation"] = talib.SUM(self.stock["Close"], timeperiod = 30)
+    
+    def Triple_Exponential_Moving_Average(self):
+        self.technical_features["Triple_Exponential_Moving_Average"] = talib.T3(self.stock["Close"], timeperiod = 5)
+
+    def Triple_Exponential_Moving_Average_Oscillator(self):
+        self.technical_features["Triple_Exponential_Moving_Average_Oscillator"] = talib.TEMA(self.stock["Close"], timeperiod = 30)
+
+    def True_Range(self):
+        self.technical_features["True_Range"] = talib.TRANGE(self.stock["High"], self.stock["Low"], self.stock["Close"])
