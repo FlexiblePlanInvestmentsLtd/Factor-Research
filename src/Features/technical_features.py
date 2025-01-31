@@ -31,7 +31,8 @@ class BuildFeatures:
                     "Rate_of_Change_Percentage", "Rate_of_Change_Ratio", "Rate_of_Change_Ratio_100","Relative_Strength_Index", "Parabolic_SAR", "Parabolic_SAR_Extended",\
                     "Simple_Moving_Average", "Standard_Deviation", "Linear_Regression_Slope", "All_Moving_Average", "Moving_Average_Convergence_Divergence",\
                     "MACD_with_controllable_MA_type","Moving_Average_Convergence/Divergence_Fix_12/26","MESA_Adaptive_Moving_Average","Highest_value_over_a_specified_period",\
-                    "Index_of_highest_value_over_a_specified_period"]
+                    "Index_of_highest_value_over_a_specified_period", "triangular_moving_average", "one_day_rate_of_change_of_a_triple_smooth_ema", "time_series_forecast",\
+                    "typical_price", "ultimate_oscillator", "variance", "weighted_close_price", "williams_r", "weighted_moving_average"]
         
         ##Aroon and Aroon Oscillator, Moving_Average_Convergence_Divergence_Fix_12_26, have issues 
 
@@ -457,7 +458,6 @@ class BuildFeatures:
         self.technical_features["MACDFIX_Histogram"] = hist
         
 
-
     def MESA_Adaptive_Moving_Average(self):
         mama, fama = talib.MAMA(
             self.stock["Close"],
@@ -473,4 +473,29 @@ class BuildFeatures:
     def Index_of_highest_value_over_a_specified_period(self):
         self.technical_features["Index_of_highest_value_over_a_specified_period"] = talib.MAXINDEX(self.stock["Close"], timeperiod=30)
 
-    
+    def triangular_moving_average(self):
+        self.technical_features["triangular_moving_average"] = talib.TRIMA(self.stock["Close"], timeperiod=30)
+
+    def one_day_rate_of_change_of_a_triple_smooth_ema(self):
+        self.technical_features["one_day_rate_of_change_of_a_triple_smooth_ema"] = talib.TRIX(self.stock["Close"], timeperiod=30)
+
+    def time_series_forecast(self):
+        self.technical_features["Time_series_forecast"] = talib.TSF(self.stock["Close"], timeperiod=14)
+
+    def typical_price(self):
+        self.technical_features["Typical_Price"] = talib.TYPPRICE(self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def ultimate_oscillator(self):
+        self.technical_features["Ultimate_Oscillator"] = talib.ULTOSC(self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def variance(self):
+        self.technical_features["Variance"] = talib.VAR(self.stock["Close"], timeperiod=5, nbdev=1)
+
+    def weighted_close_price(self):
+        self.technical_features["Weighted_Close_Price"] = talib.WCLPRICE(self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def williams_r(self):
+        self.technical_features["Williams_R"] = talib.WILLR(self.stock["High"], self.stock["Low"], self.stock["Close"])
+
+    def weighted_moving_average(self):
+        self.technical_features["Weighted_Moving_Average"] = talib.WMA(self.stock["Close"], timeperiod=30)
