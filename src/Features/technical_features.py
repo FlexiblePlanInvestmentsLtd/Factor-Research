@@ -32,7 +32,9 @@ class BuildFeatures:
                     "Simple_Moving_Average", "Standard_Deviation", "Linear_Regression_Slope", "All_Moving_Average", "Moving_Average_Convergence_Divergence",\
                     "MACD_with_controllable_MA_type","Moving_Average_Convergence/Divergence_Fix_12/26","MESA_Adaptive_Moving_Average","Highest_value_over_a_specified_period",\
                     "Index_of_highest_value_over_a_specified_period", "triangular_moving_average", "one_day_rate_of_change_of_a_triple_smooth_ema", "time_series_forecast",\
-                    "typical_price", "ultimate_oscillator", "variance", "weighted_close_price", "williams_r", "weighted_moving_average"]
+                    "typical_price", "ultimate_oscillator", "variance", "weighted_close_price", "williams_r", "weighted_moving_average",\
+                    "Minus_Directional_Indicator", "Minus_Directional_Movement", "Momentum", "Normalized_Average_True_Range", "On_Balance_Volume",\
+                    "Plus_Directional_Indicator", "Plus_Directional_Movement", "Percentage_Price_Oscillator"]
         
         ##Aroon and Aroon Oscillator, Moving_Average_Convergence_Divergence_Fix_12_26, have issues 
 
@@ -499,3 +501,30 @@ class BuildFeatures:
 
     def weighted_moving_average(self):
         self.technical_features["Weighted_Moving_Average"] = talib.WMA(self.stock["Close"], timeperiod=30)
+        
+    def Minus_Directional_Indicator(self):
+        self.technical_features["Minus_Directional_Indicator"] = talib.MINUS_DI(self.stock["High"], self.stock["Low"], self.stock["Close"])
+        
+    def Minus_Directional_Movement(self):
+        self.technical_features["Minus_Directional_Movement"] = talib.MINUS_DM(self.stock["High"], self.stock["Low"])
+        
+    def Momentum(self):
+        self.technical_features["Momentum"] = talib.MOM(self.stock["High"])
+    
+    def Normalized_Average_True_Range(self):
+        self.technical_features["Normalized_Average_True_Range"] = talib.NATR(self.stock["High"], self.stock["Low"], self.stock["Close"])
+        
+    def On_Balance_Volume(self):
+        self.technical_features["On_Balance_Volume"] = talib.OBV(self.stock["High"], self.stock["Volume"])
+        
+    def Plus_Directional_Indicator(self):
+        self.technical_features["Plus_Directional_Indicator"] = talib.PLUS_DI(self.stock["High"], self.stock["Low"], self.stock["Close"])
+        
+    def Plus_Directional_Movement(self):
+        self.technical_features["Plus_Directional_Movement"] = talib.PLUS_DM(self.stock["High"], self.stock["Low"])
+        
+    def Percentage_Price_Oscillator(self):
+        self.technical_features["Percentage_Price_Oscillator"] = talib.PPO(self.stock["High"])
+        
+    
+    
