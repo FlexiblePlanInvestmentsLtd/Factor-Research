@@ -5,8 +5,12 @@ import yfinance as yf
 
 class BuildFeatures:
     def __init__(self, data, ticker):
-        self.data = data
         self.ticker = ticker
+        self.data = {}
+        for i,j in data.items():
+            self.data[i] = j[j['ticker'] == self.ticker]
+            if 'per_type' in j.columns:
+                self.data[i] = self.data[i][self.data[i]['per_type']=='Q']
         self.build_master_data()
 
 
@@ -15,10 +19,7 @@ class BuildFeatures:
         price = yf.Ticker(self.ticker)
         self.stock = price.history(period="max", interval="1d")
         self.stock.index = self.stock.index.tz_convert('US/Eastern')
-        for i,j in self.data.items():
-            self.data[i] = j[j['ticker'] == self.ticker]
-            if 'per_type' in j.columns:
-                self.data[i] = self.data[i][self.data[i]['per_type']=='Q']
+        
 
 
     def process_financial_statements(self):
