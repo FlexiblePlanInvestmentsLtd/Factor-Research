@@ -15,6 +15,7 @@ class BuildFeatures:
 
     def build_technical_features(self):
         # Add Feature Names here
+<<<<<<< HEAD
         features = [
             "SMA_50",
             "SMA_200",
@@ -130,6 +131,33 @@ class BuildFeatures:
             "Lowest_and_highest_values_over_period",
             "Indexes_of_lowest_and_highest_values_over_period",
         ]
+=======
+        features = ["SMA_50", "SMA_200", "Chaikin_ADI_Line", "Chaikin_ADI_Oscillator", "ADM_Index", "ADM_Index_Rating", "Absolute_Price_Oscillator", \
+                    "Average_True_Range", "Average_Price", "Bollinger_Bands", \
+                    "Beta", "Balance_of_Power", "Commodity_Channel_Index", "Doji_Star", "Dragonfly_Doji", "Engulfing_Pattern", "Evening_Doji_Star",\
+                    "Evening_Star", "Up_Down_gap_side_by_side_white_lines", "Gravestone_Doji", "Hammer", "Hanging_Man", "Harami_Pattern", "Harami_Cross_Pattern",\
+                    "High_Wave_Candle", "Hikkake_Pattern", "Modified_Hikkake_Pattern", "Homing_Pigeon", "Identical_Three_Crows", "In_Neck_Pattern",\
+                    "Inverted_Hammer","Kicking","Kicking_by_Length", "Ladder_Bottom", "Long_Legged_Doji", "Long_Line_Candle", "Marubozu", "Matching_Low",\
+                    "Mat_Hold", "Morning_Doji_Star", "Morning_Star", "On_Neck_Pattern", "Piercing_Pattern",\
+                    "Rising_Falling_Three_Methods", "Separating_Lines", "Shooting_Star", "Short_Line_Candle", "Spinning_Top", "Stalled_Pattern", "Stick_Sandwich",\
+                    "Takuri", "Tasuki_Gap", "Thrusting_Pattern", "Tristar_Pattern", "Unique_3_River", "Upside_Gap_Two_Crows", "Upside_Downside_Gap_Three_Methods",\
+                    "Chande_Momentum_Oscillator", "Pearson_Correlation_Coefficient", "Double_Exponential_Moving_Average", "Directional_Movement_Index",\
+                    "Exponential_Moving_Average", "Hilbert_Transform_Dominant_Cycle_Period", "Hilbert_Transform_Dominant_Cycle_Phase", "Hilbert_Transform_Phasor_Components",\
+                    "Hilbert_Transform_SineWave", "Hilbert_Transform_Instantaneous_Trendline", "Hilbert_Transform_Trend_vs_Cycle_Mode", "Kaufman_Adaptive_Moving_Average",\
+                    "Linear_Regression", "Linear_Regression_Angle", "Linear_Regression_Intercept",\
+                    "Rate_of_Change_Percentage", "Rate_of_Change_Ratio", "Rate_of_Change_Ratio_100","Relative_Strength_Index", "Parabolic_SAR", "Parabolic_SAR_Extended",\
+                    "Simple_Moving_Average", "Standard_Deviation", "Linear_Regression_Slope", "All_Moving_Average", "Moving_Average_Convergence_Divergence",\
+                    "MACD_with_controllable_MA_type","Moving_Average_Convergence/Divergence_Fix_12/26","MESA_Adaptive_Moving_Average","Highest_value_over_a_specified_period",\
+                    "Index_of_highest_value_over_a_specified_period", "triangular_moving_average", "one_day_rate_of_change_of_a_triple_smooth_ema", "time_series_forecast",\
+                    "typical_price", "ultimate_oscillator", "variance", "weighted_close_price", "williams_r", "weighted_moving_average",\
+                    "Minus_Directional_Indicator", "Minus_Directional_Movement", "Momentum", "Normalized_Average_True_Range", "On_Balance_Volume",\
+                    "Plus_Directional_Indicator", "Plus_Directional_Movement", "Percentage_Price_Oscillator" , "Median_Price", "Money_Flow_Index", "MidPoint_over_period",\
+                    "Midpoint_Price_over_period", "Lowest_value_over_period", "Index_of_lowest_value_over_period", "Lowest_and_highest_values_over_period", \
+                    "Indexes_of_lowest_and_highest_values_over_period", "Stochastic", "Stochastic_Fast", "Stochastic_RSI", "Summation", "Triple_Exponential_Moving_Average",\
+                    "Triple_Exponential_Moving_Average_Oscillator", "True_Range", "Close_Price"]
+        
+        ##Aroon and Aroon Oscillator, Moving_Average_Convergence_Divergence_Fix_12_26, have issues 
+>>>>>>> 9b42663 (Saving local changes)
 
         ##Aroon and Aroon Oscillator, Moving_Average_Convergence_Divergence_Fix_12_26, have issues
 
@@ -1071,9 +1099,20 @@ class BuildFeatures:
         )
 
     def Indexes_of_lowest_and_highest_values_over_period(self, timeperiod=14):
+<<<<<<< HEAD
         self.technical_features["Index_of_lowest_value_over_period"] = talib.MININDEX(
             self.stock["Close"], timeperiod=timeperiod
         )
         self.technical_features["Index_of_highest_value_over_period"] = talib.MAXINDEX(
             self.stock["Close"], timeperiod=timeperiod
         )
+=======
+        self.technical_features["Index_of_lowest_value_over_period"] = talib.MININDEX(self.stock["Close"], timeperiod=timeperiod)
+        self.technical_features["Index_of_highest_value_over_period"] = talib.MAXINDEX(self.stock["Close"], timeperiod=timeperiod)
+
+    def Close_Price(self, timeperiod=14):
+        self.technical_features["Close_Price"] = self.stock["Close"]
+        
+    
+    
+>>>>>>> 9b42663 (Saving local changes)
